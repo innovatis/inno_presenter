@@ -8,6 +8,8 @@ class InnoPresenter::Base
       @@url_helpers_included = true
     end 
   end 
+
+  attr_reader :controller
   
   def present_collection(coll, presenter=:present)
     coll.map{ |obj| send(presenter, obj) }
