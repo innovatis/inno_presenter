@@ -1,7 +1,8 @@
 class ActionController::Base
   def self.present_with(presenter)
     define_method(:index) do
-      @content = presenter.present_collection(collection)
+      @presenter    = presenter.new(self)
+      @presentation = @presenter.present_collection(collection)
     end 
   end 
 end 
