@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Presenters are presenters}
   s.description = %q{Presenters are presenters}
 
-  s.add_dependency "action_pack"
+  s.add_dependency "actionpack"
   s.add_dependency "filterriffic"
   
   s.files         = `git ls-files`.split("\n")

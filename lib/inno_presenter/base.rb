@@ -2,6 +2,11 @@ class InnoPresenter::Base
   def initialize(controller)
     @controller = controller
     @controller_helpers = @controller._helper_methods
+
+    unless @@url_helpers_included
+      self.class.send(:include, Rails.application.routes.url_helpers) 
+      @@url_helpers_included = true
+    end 
   end 
   
   def present_collection(coll, presenter=:present)
@@ -21,6 +26,5 @@ class InnoPresenter::Base
   end 
   
   include ActionView::Helpers
-  include Rails.application.routes.url_helpers
 end 
 

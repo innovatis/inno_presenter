@@ -1,7 +1,9 @@
 module InnoPresenter
 
   class Railtie < Rails::Railtie
-    config.load_paths += "#{Rails.root}/app/presenters/"
+    initializer 'inno_presenter.initialize' do |app|
+      app.config.load_paths << "#{Rails.root}/app/presenters/"
+    end
   end
 
 end
