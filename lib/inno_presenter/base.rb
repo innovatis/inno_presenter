@@ -3,7 +3,7 @@ class InnoPresenter::Base
     @controller = controller
     @controller_helpers = @controller._helper_methods
 
-    unless @@url_helpers_included
+    unless defined?(@@url_helpers_included)
       self.class.send(:include, Rails.application.routes.url_helpers) 
       @@url_helpers_included = true
     end 
