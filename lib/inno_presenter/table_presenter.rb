@@ -1,6 +1,6 @@
 module InnoPresenter
   class TablePresenter < Base
-    include Filterriffic
+    include Filterriffic::Presenter
   end 
 end 
 
