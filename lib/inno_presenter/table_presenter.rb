@@ -42,7 +42,11 @@ module InnoPresenter
     def present(obj)
       columns.map do |f| 
         item = items.find{|i|i[:tag] == f}
-        obj.send(item[:field])
+        if item[:formatter]
+          item[:formatter].call(obj.send(item[:field]))
+        else 
+          obj.send(item[:field])
+        end 
       end + [
         {'link' => resource_path(obj)}.merge(extra(obj))
       ]
@@ -52,13 +56,23 @@ module InnoPresenter
       type = resource_class.columns.find{|c|c.name == field.to_s}.type
       # TODO: revise supported types in filterriffic
       { 
-        :tag => field,
-        :type => type,
-        :title => field.to_s.humanize,
-        :field => field
+        :tag       => field,
+        :type      => type,
+        :title     => field.to_s.humanize,
+        :field     => field,
+        :formatter => default_formatter(type)
       }
     end 
 
+    def default_formatter(type)
+      case type
+      when :datetime
+        proc{|f|f.try(:to_s, :short)}
+      else 
+        nil
+      end 
+    end 
+    
     def present_filters
       filters.map do |f| 
         item = items.find{|i|i[:tag] == f}
