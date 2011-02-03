@@ -3,12 +3,7 @@ module InnoPresenter
     include Filterriffic::Presenter
 
     def resource_class
-      # Admin::CompaniesPresenter => Company
-      self.class.name.
-        sub(/Presenter$/,'').
-        sub(/^.*::/,'').
-        singularize.
-        constantize
+      default_resource_class
     end 
 
     def resource_path(obj)
@@ -39,6 +34,15 @@ module InnoPresenter
     # Wouldn't recommend overriding from here on down. #################
     ####################################################################
     
+    def default_resource_class
+      # Admin::CompaniesPresenter => Company
+      self.class.name.
+        sub(/Presenter$/,'').
+        sub(/^.*::/,'').
+        singularize.
+        constantize
+    end 
+
     def present(obj)
       columns.map do |f| 
         item = items.find{|i|i[:tag] == f}
