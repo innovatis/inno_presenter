@@ -81,6 +81,8 @@ module InnoPresenter
         { 
           :tag   => item[:tag],
           :type  => item[:type],
+          :joins => item[:joins],
+          :field => item[:field],
           :title => item[:title] # todo pick one of these names.
         }      
       end
