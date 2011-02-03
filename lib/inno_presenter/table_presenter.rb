@@ -11,7 +11,7 @@ module InnoPresenter
     end 
     
     def items
-      []
+      resource_class.columns.map{|c|item(c.name)}
     end 
 
     def filters
