@@ -61,7 +61,7 @@ module InnoPresenter
       { 
         :tag       => "#{assoc}_#{field}".to_sym,
         :type      => type,
-        :title     => field.to_s.humanize,
+        :title     => "#{assoc} #{field}".humanize,
         :field     => field,
         :proxy     => proc{|o|o.send assoc},
         :joins     => assoc,
