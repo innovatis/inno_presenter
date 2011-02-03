@@ -56,7 +56,7 @@ module InnoPresenter
 
     def belongs_to_item(assoc, field, opts={})
       # item(:company_name, :proxy => proc{|o|o.company}, :joins => :company, :title => "Company", :field => :name, :type => :string),
-      assoc_class = resource_class.reflect_on_all_associations.find{|a|a.name == assoc}.active_record
+      assoc_class = resource_class.reflect_on_all_associations.find{|a|a.name == assoc}.klass
       type = assoc_class.columns.find{|c|c.name == field.to_s}.try(:type)
       { 
         :tag       => "#{assoc}_#{field}".to_sym,
