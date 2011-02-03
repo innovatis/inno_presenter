@@ -42,18 +42,20 @@ module InnoPresenter
     def present(obj)
       columns.map do |f| 
         item = items.find{|i|i[:tag] == f}
-        if item[:formatter]
-          item[:formatter].call(obj.send(item[:field]))
-        else 
-          obj.send(item[:field])
-        end 
+        
+        val = obj
+        val = item[:proxy].call(val)     if item[:proxy]
+        val = val.send(item[:field])
+        val = item[:formatter].call(val) if item[:formatter]
+        
+        val
       end + [
         {'link' => resource_path(obj)}.merge(extra(obj))
       ]
     end 
 
     def item(field, opts={})
-      type = resource_class.columns.find{|c|c.name == field.to_s}.type
+      type = resource_class.columns.find{|c|c.name == field.to_s}.try(:type)
       # TODO: revise supported types in filterriffic
       { 
         :tag       => field,
@@ -61,7 +63,7 @@ module InnoPresenter
         :title     => field.to_s.humanize,
         :field     => field,
         :formatter => default_formatter(type)
-      }
+      }.merge(opts)
     end 
 
     def default_formatter(type)
