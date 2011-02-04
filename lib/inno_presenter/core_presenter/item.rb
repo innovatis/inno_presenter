@@ -42,7 +42,7 @@ module InnoPresenter
         if assoc_arr.blank?
           attribute
         else 
-          "#{assoc_arr.last.to_s.pluralize}.#{attribute}"
+          "#{model_class.table_name}.#{attribute}"
         end 
       end 
       
