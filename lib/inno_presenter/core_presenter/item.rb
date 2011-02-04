@@ -5,16 +5,18 @@ module InnoPresenter
       
       def initialize(klass, key, opts={}, &blk)
         if key.kind_of?(Hash) 
-          @joins, @attribute = InnoFilter.nested_hash_pop(key)
+          @joins, @attribute = nested_hash_pop(key)
    
-          @assoc_arr = InnoFilter.nested_hash_to_array(@joins)
-          @tag = [*assoc_arr, @attribute].join("_")
-          @title = [*assoc_arr, @attribute].map{|sym|sym.to_s.humanize}.join(" ")
+          @assoc_arr = nested_hash_to_array(@joins)
+          @tag = [*@assoc_arr, @attribute].join("_")
+          @title = [*@assoc_arr, @attribute].map{|sym|sym.to_s.humanize}.join(" ")
           
-          @model_class = assoc_arr.inject(klass) do |kl, assoc|
+          @model_class = @assoc_arr.inject(klass) do |kl, assoc|
             kl.reflect_on_all_associations.find{ |a| a.name == assoc }.klass
           end 
         else
+          @title = key.to_s.humanize
+          @assoc_arr = nil
           @joins = nil
           @attribute = key
           @model_class = klass
@@ -34,6 +36,14 @@ module InnoPresenter
         yield self if block_given?
       end 
    
+      def attribute_for_query
+        if assoc_arr.blank?
+          attribute
+        else 
+          "#{assoc_arr.last.to_s.pluralize}.#{attribute}"
+        end 
+      end 
+      
       attr_accessor *ATTRIBUTES
    
       private ############################################################

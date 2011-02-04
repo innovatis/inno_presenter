@@ -48,7 +48,7 @@ module InnoPresenter
         
         val = obj
         if item.assoc_arr.present?
-          val = assoc_arr.inject(val){|a,v|a.try(v)}
+          val = item.assoc_arr.inject(val){|a,v|a.try(v)}
         end 
         val = val.try(item.attribute)
         if f=item.formatter
