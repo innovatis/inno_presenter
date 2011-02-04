@@ -8,7 +8,7 @@ module InnoPresenter
           @joins, @attribute = nested_hash_pop(key)
    
           @assoc_arr = nested_hash_to_array(@joins)
-          @tag = [*@assoc_arr, @attribute].join("_")
+          @tag = [*@assoc_arr, @attribute].join("_").to_sym
           @title = [*@assoc_arr, @attribute].map{|sym|sym.to_s.humanize}.join(" ")
           
           @model_class = @assoc_arr.inject(klass) do |kl, assoc|
@@ -20,7 +20,7 @@ module InnoPresenter
           @joins = nil
           @attribute = key
           @model_class = klass
-          @tag = key
+          @tag = key.to_sym
         end 
    
         @type = @model_class.columns.find{ |c| c.name == @attribute.to_s }.try(:type)
