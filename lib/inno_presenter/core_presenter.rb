@@ -83,7 +83,7 @@ module InnoPresenter
         { 
           :tag   => item.tag,
           :type  => item.type,
-          :field => item.field,
+          :field => item.attribute,
           :title => item.title
         }      
       end
