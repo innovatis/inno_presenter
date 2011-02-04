@@ -37,7 +37,11 @@ module InnoPresenter
           @formatter = blk
         end 
       end 
-   
+
+      def virtual?
+        ! @type
+      end 
+
       def attribute_for_query
         if assoc_arr.blank?
           attribute
