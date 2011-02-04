@@ -68,15 +68,6 @@ module InnoPresenter
       Item.new(resource_class, key, opts)
     end 
 
-    def default_formatter(type)
-      case type
-      when :datetime
-        proc{|f|f.try(:to_s, :short)}
-      else 
-        nil
-      end 
-    end 
-    
     def present_filters_for_frontend
       filters.map do |f| 
         item = items.find{|i|i.tag == f}

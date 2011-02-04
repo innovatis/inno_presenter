@@ -24,6 +24,8 @@ module InnoPresenter
         end 
    
         @type = @model_class.columns.find{ |c| c.name == @attribute.to_s }.try(:type)
+
+        @formatter = default_formatter
         
         opts.each do |opt, value|
           if ATTRIBUTES.include?(opt)
@@ -42,6 +44,15 @@ module InnoPresenter
         ! @type
       end 
 
+      def default_formatter
+        case @type
+        when :datetime
+          proc{|f|f.try(:to_s, :short)}
+        else 
+          nil
+        end 
+      end 
+    
       def attribute_for_query
         if assoc_arr.blank?
           attribute
