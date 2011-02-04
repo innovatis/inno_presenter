@@ -111,7 +111,7 @@ module InnoPresenter
         item = items.find{|i|i[:tag] == f}
         { 
           :field => item[:field],
-          :title => item[:title] # todo pick one of these names.
+          :title => item[:title]
         }      
       end
     end 
