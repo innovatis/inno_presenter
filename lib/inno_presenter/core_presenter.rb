@@ -53,9 +53,9 @@ module InnoPresenter
         val = val.try(item.attribute)
         if f=item.formatter
           if f.arity == 2
-            item.formatter.call(val, obj)
+            val = f.call(val, obj)
           else 
-            item.formatter.call(val)
+            val = f.call(val)
           end 
         end 
         val
