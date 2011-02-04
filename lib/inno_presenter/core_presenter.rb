@@ -1,5 +1,5 @@
 module InnoPresenter
-  class CorePresenter
+  class CorePresenter < Base
 
     def resource_class
       default_resource_class
