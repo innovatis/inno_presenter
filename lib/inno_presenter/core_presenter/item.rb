@@ -32,8 +32,10 @@ module InnoPresenter
             raise "Invalid attribute"
           end 
         end 
-   
-        yield self if block_given?
+
+        if block_given?
+          @formatter = blk
+        end 
       end 
    
       def attribute_for_query
