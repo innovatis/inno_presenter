@@ -8,8 +8,8 @@ module InnoPresenter
           @joins, @attribute = nested_hash_pop(key)
    
           @assoc_arr = nested_hash_to_array(@joins)
-          @tag = [*@assoc_arr, @attribute].join("_").to_sym
-          @title = [*@assoc_arr, @attribute].map{|sym|sym.to_s.humanize}.join(" ")
+          @tag = (@assoc_arr + [@attribute]).join("_").to_sym
+          @title = (@assoc_arr + [@attribute].map{|sym|sym.to_s.humanize}.join(" ")
           
           @model_class = @assoc_arr.inject(klass) do |kl, assoc|
             kl.reflect_on_all_associations.find{ |a| a.name == assoc }.klass
