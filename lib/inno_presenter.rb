@@ -3,13 +3,13 @@ module InnoPresenter
   class Railtie < Rails::Railtie
     initializer 'inno_presenter.initialize' do |app|
       assets_path = File.join(File.dirname(__FILE__), '..', 'assets')
-      FileUtils.ln_sf(File.expand_path(assets_path), File.join(Rails.root, 'public', 'inno_presenter'))
+      FileUtils.ln_sf(File.expand_path(assets_path), File.join(Rails.root, 'public', 'lib', 'inno_presenter'))
 
       app.config.load_paths += ["#{Rails.root}/app/presenters/"]
 
       javascripts = {
         :inno_presenter => [
-          '/inno_presenter/jquery.dataTables.js'
+          '/lib/inno_presenter/jquery.dataTables.js'
         ]
       }
       
