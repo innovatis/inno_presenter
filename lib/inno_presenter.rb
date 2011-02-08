@@ -7,10 +7,10 @@ module InnoPresenter
       assets_path = File.join(File.dirname(__FILE__), '..', 'assets')
       
       target = File.join(Rails.root, 'public', 'lib', 'inno_presenter')
-      FileUtils.rm(target)
-      FileUtils.ln_sf(File.expand_path(assets_path), target)
+      FileUtils.rm_r(target)
+      FileUtils.cp_r(File.expand_path(assets_path), target)
 
-      app.config.load_paths += ["#{Rails.root}/app/presenters/"]
+      app.config.autoload_paths += ["#{Rails.root}/app/presenters/"]
 
       javascripts = {
         :inno_presenter => [
