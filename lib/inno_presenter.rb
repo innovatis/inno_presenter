@@ -1,9 +1,14 @@
+require 'fileutils'
+
 module InnoPresenter
 
   class Railtie < Rails::Railtie
     initializer 'inno_presenter.initialize' do |app|
       assets_path = File.join(File.dirname(__FILE__), '..', 'assets')
-      FileUtils.ln_sf(File.expand_path(assets_path), File.join(Rails.root, 'public', 'lib', 'inno_presenter'))
+      
+      target = File.join(Rails.root, 'public', 'lib', 'inno_presenter')
+      FileUtils.rm(target)
+      FileUtils.ln_sf(File.expand_path(assets_path), target)
 
       app.config.load_paths += ["#{Rails.root}/app/presenters/"]
 
