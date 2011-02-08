@@ -7,7 +7,7 @@ module InnoPresenter
       assets_path = File.join(File.dirname(__FILE__), '..', 'assets')
       
       target = File.join(Rails.root, 'public', 'lib', 'inno_presenter')
-      FileUtils.rm_r(target)
+      FileUtils.rm_r(target) if File.exist?(target)
       FileUtils.cp_r(File.expand_path(assets_path), target)
 
       app.config.autoload_paths += ["#{Rails.root}/app/presenters/"]
