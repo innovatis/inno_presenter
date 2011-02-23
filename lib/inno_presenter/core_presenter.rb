@@ -35,7 +35,7 @@ module InnoPresenter
     
     def default_resource_class
       # Admin::CompaniesPresenter => Company
-      self.class.name.
+      @_default_resource_class ||= self.class.name.
         sub(/Presenter$/,'').
         sub(/^.*::/,'').
         singularize.
