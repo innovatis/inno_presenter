@@ -91,7 +91,7 @@ module InnoPresenter
         item = items.find{|i|i.tag == f}
         { 
           :field => item.attribute,
-          :title => item.title
+          :title => item.title.try(:titleize)
         }      
       end
     end 
