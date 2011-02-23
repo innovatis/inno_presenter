@@ -15,7 +15,8 @@ class ActionController::Base
       @presenter ||= presenter.new(self)
     end 
     define_method(:index) do
-      @presentation = self.presenter.present_collection(collection)
+      # dont need this right now...
+      # @presentation = self.presenter.present_collection(collection)
     end 
   end 
 end 
