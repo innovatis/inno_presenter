@@ -1,6 +1,10 @@
 module InnoPresenter
   class CorePresenter < Base
 
+    def self.title
+      self.name.sub(/^.*::/,'').sub(/Presenter$/,'')
+    end 
+    
     def resource_class
       default_resource_class
     end 
