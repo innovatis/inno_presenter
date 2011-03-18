@@ -1,5 +1,5 @@
 module InnoPresenter
-  class CorePresenter < Base
+  class TablePresenter < Base
 
     def self.title
       self.name.sub(/^.*::/,'').sub(/Presenter$/,'')

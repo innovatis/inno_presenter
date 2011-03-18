@@ -31,6 +31,6 @@ module InnoPresenter
 end
 
 require File.join(File.dirname(__FILE__), 'inno_presenter', 'base')
-require File.join(File.dirname(__FILE__), 'inno_presenter', 'core_presenter')
-require File.join(File.dirname(__FILE__), 'inno_presenter', 'core_presenter', 'item')
+require File.join(File.dirname(__FILE__), 'inno_presenter', 'table_presenter')
+require File.join(File.dirname(__FILE__), 'inno_presenter', 'table_presenter', 'item')
 require File.join(File.dirname(__FILE__), 'inno_presenter', 'action_controller_extensions')

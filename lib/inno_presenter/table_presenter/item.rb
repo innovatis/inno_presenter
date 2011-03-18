@@ -1,5 +1,5 @@
 module InnoPresenter
-  class CorePresenter
+  class TablePresenter
     class Item
       ATTRIBUTES = [:tag, :assoc_arr, :joins, :attribute, :model_class, :type, :title, :formatter]
       

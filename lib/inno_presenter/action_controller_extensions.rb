@@ -5,7 +5,7 @@ class ActionController::Base
       sub(/^.*::/,'').
       singularize.
       constantize
-    presenter_class = Class.new(InnoPresenter::CorePresenter)
+    presenter_class = Class.new(InnoPresenter::TablePresenter)
     presenter_class.send(:define_method, :resource_class) { model_class }
     present_with(presenter_class)
   end 
