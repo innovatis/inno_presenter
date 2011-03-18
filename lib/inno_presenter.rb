@@ -10,4 +10,6 @@ module InnoPresenter
 
 end
 
-require File.join(File.dirname(__FILE__), 'inno_presenter', 'base')
+$:.unshift File.dirname(__FILE__)
+
+require 'inno_presenter/base'
