@@ -17,7 +17,7 @@ module InnoPresenter
       resource_class.columns.map do |c|
         item(resource_class.human_attribute_name(c.name))
       end
-    end 
+    end
 
     def filters
       items.map{|i| i.tag}
@@ -63,4 +63,51 @@ module InnoPresenter
           else 
             val = f.call(val)
           end 
+        end 
+        val
+      end + [
+        {'link' => resource_path(obj)}.merge(extra(obj))
+      ]
+    end 
+
+    def item(key, opts={})
+      Item.new(resource_class, key, opts)
+    end 
+
+    def present_filters_for_frontend
+      filters.map do |f| 
+        item = items.find{|i|i.tag == f}
+        { 
+          :tag   => item.tag,
+          :type  => item.type,
+          :field => item.attribute,
+          :title => item.title
+        }      
+      end
+    end 
+
+    def present_filters_for_backend
+      filters.map do |f| 
+        items.find{|i|i.tag == f}
+      end
+    end 
+    
+    def present_columns
+      columns.map do |f| 
+        item = items.find{|i|i.tag == f}
+        { 
+          :field => item.attribute,
+          :title => item.title.try(:titleize)
+        }      
+      end
+    end 
+
+    def present_search_column
+      search_column
+    end 
+    
+  end 
+
+end 
+
 
